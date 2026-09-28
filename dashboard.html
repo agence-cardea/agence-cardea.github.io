@@ -41,7 +41,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Login Screen */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -148,7 +147,6 @@
             padding: 32px 24px;
         }
 
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -200,7 +198,6 @@
             background: var(--bg);
         }
 
-        /* KPI Cards */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -262,7 +259,6 @@
         .kpi-card .change.positive { color: var(--success); }
         .kpi-card .change.negative { color: #ef4444; }
 
-        /* Charts Grid */
         .charts-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -302,7 +298,6 @@
         .span-8 { grid-column: span 8; }
         .span-12 { grid-column: span 12; }
 
-        /* Channel Section */
         .channel-section {
             margin-bottom: 32px;
         }
@@ -370,7 +365,6 @@
             font-size: 0.9rem;
         }
 
-        /* Funnel */
         .funnel-container {
             display: flex;
             flex-direction: column;
@@ -406,7 +400,6 @@
             min-width: 100px;
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
             .span-4, .span-5, .span-6, .span-7, .span-8 {
                 grid-column: span 12;
@@ -419,7 +412,6 @@
             .kpi-card .value { font-size: 1.6rem; }
         }
 
-        /* Sync indicator */
         .sync-status {
             display: flex;
             align-items: center;
@@ -443,7 +435,6 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="logo">📊</div>
@@ -456,7 +447,6 @@
     </div>
 
     <div class="container" id="dashboardContainer" style="display: none;">
-        <!-- Header -->
         <div class="header">
             <div>
                 <h1>Tableau de bord KPI</h1>
@@ -476,7 +466,6 @@
             </div>
         </div>
 
-        <!-- KPI Cards -->
         <div class="kpi-grid">
             <div class="kpi-card">
                 <div class="icon" style="background: var(--accent-light);">👥</div>
@@ -516,9 +505,7 @@
             </div>
         </div>
 
-        <!-- Charts -->
         <div class="charts-grid">
-            <!-- Revenue Evolution -->
             <div class="chart-card span-7">
                 <h3>Évolution du chiffre d'affaires</h3>
                 <p class="chart-subtitle">6 derniers mois — par source</p>
@@ -527,7 +514,6 @@
                 </div>
             </div>
 
-            <!-- Client Sources Donut -->
             <div class="chart-card span-5">
                 <h3>Sources de clients</h3>
                 <p class="chart-subtitle">Répartition sur 30 jours</p>
@@ -536,7 +522,6 @@
                 </div>
             </div>
 
-            <!-- Instagram Engagement -->
             <div class="chart-card span-4">
                 <h3>Instagram — Engagement</h3>
                 <p class="chart-subtitle">Interactions par publication</p>
@@ -545,7 +530,6 @@
                 </div>
             </div>
 
-            <!-- LinkedIn Growth -->
             <div class="chart-card span-4">
                 <h3>LinkedIn — Croissance</h3>
                 <p class="chart-subtitle">Nouveaux abonnés / mois</p>
@@ -554,7 +538,6 @@
                 </div>
             </div>
 
-            <!-- Newsletter Performance -->
             <div class="chart-card span-4">
                 <h3>Newsletter — Performance</h3>
                 <p class="chart-subtitle">Taux d'ouverture vs clics</p>
@@ -563,7 +546,6 @@
                 </div>
             </div>
 
-            <!-- Sales Funnel -->
             <div class="chart-card span-12">
                 <h3>Tunnel de vente — Mini lancements</h3>
                 <p class="chart-subtitle">Conversion du funnel pour les offres ponctuelles</p>
@@ -573,11 +555,9 @@
             </div>
         </div>
 
-        <!-- Channel Details -->
         <div class="channel-section">
             <h2>📊 Détail par canal</h2>
             <div class="channel-grid">
-                <!-- Instagram -->
                 <div class="channel-card">
                     <div class="channel-header">
                         <div class="channel-dot" style="background: var(--instagram);"></div>
@@ -601,7 +581,6 @@
                     </div>
                 </div>
 
-                <!-- LinkedIn -->
                 <div class="channel-card">
                     <div class="channel-header">
                         <div class="channel-dot" style="background: var(--linkedin);"></div>
@@ -625,7 +604,6 @@
                     </div>
                 </div>
 
-                <!-- MailerLite -->
                 <div class="channel-card">
                     <div class="channel-header">
                         <div class="channel-dot" style="background: var(--mailerlite);"></div>
@@ -649,7 +627,6 @@
                     </div>
                 </div>
 
-                <!-- Thrivecart -->
                 <div class="channel-card">
                     <div class="channel-header">
                         <div class="channel-dot" style="background: var(--thrivecart);"></div>
@@ -673,7 +650,6 @@
                     </div>
                 </div>
 
-                <!-- Tally -->
                 <div class="channel-card">
                     <div class="channel-header">
                         <div class="channel-dot" style="background: var(--tally);"></div>
@@ -697,7 +673,6 @@
                     </div>
                 </div>
 
-                <!-- Fotostudio -->
                 <div class="channel-card">
                     <div class="channel-header">
                         <div class="channel-dot" style="background: var(--fotostudio);"></div>
@@ -723,22 +698,15 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <div style="text-align: center; padding: 24px 0; color: var(--text-secondary); font-size: 0.8rem;">
-            <p>Connecté à MailerLite, Thrivecart, Tally, Instagram, LinkedIn — Données en temps réel</p>
+            <p>Connecté à MailerLite, Thrivecart, Tally, Notion, Instagram, LinkedIn — Données en temps réel</p>
         </div>
     </div>
 
     <script>
-        // ============================================
-        // CONFIGURATION
-        // ============================================
         const WORKER_URL = 'https://mbm-kpi-v1.annabelle-3ad.workers.dev';
         const PASSWORD = 'MBM26';
 
-        // ============================================
-        // AUTHENTIFICATION
-        // ============================================
         function checkPassword() {
             const input = document.getElementById('passwordInput').value;
             if (input === PASSWORD) {
@@ -753,97 +721,78 @@
             }
         }
 
-        // ============================================
-        // RÉCUPÉRATION DES DONNÉES DU WORKER
-        // ============================================
-        async function fetchWorkerData(source) {
-            try {
-                // Essayer avec mode no-cors pour contourner les restrictions de l'iframe
-                const response = await fetch(`${WORKER_URL}?source=${source}`, {
-                    mode: 'cors',
-                    credentials: 'omit'
-                });
-                if (!response.ok) throw new Error('Erreur API');
-                return await response.json();
-            } catch (error) {
-                console.warn('Worker indisponible:', error);
-                // Fallback: essayer avec XMLHttpRequest
-                return new Promise((resolve) => {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('GET', `${WORKER_URL}?source=${source}`, true);
-                    xhr.onload = function() {
-                        if (xhr.status === 200) {
-                            try {
-                                resolve(JSON.parse(xhr.responseText));
-                            } catch (e) {
-                                resolve(null);
-                            }
-                        } else {
-                            resolve(null);
-                        }
-                    };
-                    xhr.onerror = function() {
-                        resolve(null);
-                    };
-                    xhr.send();
-                });
-            }
+        // Chargement des données via JSONP (compatible avec les iframes)
+        function loadDataViaJSONP(source, callback) {
+            const script = document.createElement('script');
+            const callbackName = 'jsonp_' + source + '_' + Date.now();
+            
+            window[callbackName] = function(data) {
+                callback(data);
+                delete window[callbackName];
+                document.head.removeChild(script);
+            };
+            
+            script.src = `${WORKER_URL}?source=${source}&callback=${callbackName}`;
+            script.onerror = function() {
+                callback(null);
+                delete window[callbackName];
+                document.head.removeChild(script);
+            };
+            
+            document.head.appendChild(script);
         }
 
         async function loadDashboardData() {
-            // Charger MailerLite
-            const mailerlite = await fetchWorkerData('mailerlite');
-            if (mailerlite && !mailerlite.error) {
-                updateKPI('subscribers', mailerlite.subscribers || 0);
-                document.getElementById('mailerlite-subscribers').textContent = (mailerlite.subscribers || 0).toLocaleString('fr-FR');
-                if (mailerlite.recentCampaigns && mailerlite.recentCampaigns.length > 0) {
-                    const lastCampaign = mailerlite.recentCampaigns[0];
-                    document.getElementById('mailerlite-openrate').textContent = (lastCampaign.openRate || 0) + '%';
-                    document.getElementById('mailerlite-clickrate').textContent = (lastCampaign.clickRate || 0) + '%';
+            // Charger Notion (nouveaux clients)
+            loadDataViaJSONP('notion', function(data) {
+                if (data && !data.error) {
+                    updateKPI('clients', data.newClients || 0);
                 }
-            }
+            });
+
+            // Charger MailerLite
+            loadDataViaJSONP('mailerlite', function(data) {
+                if (data && !data.error) {
+                    updateKPI('subscribers', data.subscribers || 0);
+                    document.getElementById('mailerlite-subscribers').textContent = (data.subscribers || 0).toLocaleString('fr-FR');
+                    if (data.recentCampaigns && data.recentCampaigns.length > 0) {
+                        const lastCampaign = data.recentCampaigns[0];
+                        document.getElementById('mailerlite-openrate').textContent = (lastCampaign.openRate || 0) + '%';
+                        document.getElementById('mailerlite-clickrate').textContent = (lastCampaign.clickRate || 0) + '%';
+                    }
+                }
+            });
 
             // Charger Thrivecart
-            const thrivecart = await fetchWorkerData('thrivecart');
-            if (thrivecart && !thrivecart.error) {
-                document.getElementById('thrivecart-products').textContent = thrivecart.products || 0;
-                document.getElementById('thrivecart-orders').textContent = thrivecart.orders || 0;
-                document.getElementById('thrivecart-revenue').textContent = (thrivecart.totalRevenue || 0).toLocaleString('fr-FR') + ' €';
-                if (thrivecart.orders > 0) {
-                    const aov = thrivecart.totalRevenue / thrivecart.orders;
-                    document.getElementById('thrivecart-aov').textContent = aov.toFixed(2) + ' €';
+            loadDataViaJSONP('thrivecart', function(data) {
+                if (data && !data.error) {
+                    document.getElementById('thrivecart-products').textContent = data.products || 0;
+                    document.getElementById('thrivecart-orders').textContent = data.orders || 0;
+                    document.getElementById('thrivecart-revenue').textContent = (data.totalRevenue || 0).toLocaleString('fr-FR') + ' €';
+                    if (data.orders > 0) {
+                        const aov = data.totalRevenue / data.orders;
+                        document.getElementById('thrivecart-aov').textContent = aov.toFixed(2) + ' €';
+                    }
                 }
-            }
-
-            // Charger Tally
-            const tally = await fetchWorkerData('tally');
-            if (tally && !tally.error) {
-                document.getElementById('tally-forms').textContent = tally.forms || 0;
-                document.getElementById('tally-responses').textContent = tally.responses || 0;
-            }
-
-            // Charger Notion (nouveaux clients)
-            const notion = await fetchWorkerData('notion');
-            if (notion && !notion.error) {
-                updateKPI('clients', notion.newClients || 0);
-            }
+            });
 
             // Charger Instagram
-            const instagram = await fetchWorkerData('instagram');
-            if (instagram && !instagram.error) {
-                document.getElementById('insta-followers').textContent = (instagram.followers || 0).toLocaleString('fr-FR');
-                document.getElementById('insta-posts').textContent = instagram.posts || 0;
-                document.getElementById('insta-reach').textContent = (instagram.reach || 0).toLocaleString('fr-FR');
-            }
+            loadDataViaJSONP('instagram', function(data) {
+                if (data && !data.error) {
+                    document.getElementById('insta-followers').textContent = (data.followers || 0).toLocaleString('fr-FR');
+                    document.getElementById('insta-posts').textContent = data.posts || 0;
+                    document.getElementById('insta-reach').textContent = (data.reach || 0).toLocaleString('fr-FR');
+                }
+            });
 
             // Charger LinkedIn
-            const linkedin = await fetchWorkerData('linkedin');
-            if (linkedin && !linkedin.error) {
-                document.getElementById('linkedin-followers').textContent = (linkedin.followers || 0).toLocaleString('fr-FR');
-                updateKPI('linkedin', linkedin.followers || 0);
-            }
+            loadDataViaJSONP('linkedin', function(data) {
+                if (data && !data.error) {
+                    document.getElementById('linkedin-followers').textContent = (data.followers || 0).toLocaleString('fr-FR');
+                    updateKPI('linkedin', data.followers || 0);
+                }
+            });
 
-            // Mettre à jour le statut de synchronisation
             document.querySelector('.sync-status span').textContent = 'Dernière synchro : ' + new Date().toLocaleTimeString('fr-FR');
         }
 
@@ -858,25 +807,15 @@
             }
         }
 
-        // ============================================
-        // INITIALISATION DU DASHBOARD
-        // ============================================
         function initDashboard() {
-            // Charger les données réelles
             loadDashboardData();
-
-            // Initialiser les graphiques vides (en attente de données)
             initCharts();
         }
 
-        // ============================================
-        // CONFIGURATION GRAPHIQUES
-        // ============================================
         Chart.defaults.font.family = 'Inter, sans-serif';
         Chart.defaults.color = '#6b7280';
 
         function initCharts() {
-            // Revenue Chart (vide en attente de données)
             const revenueCtx = document.getElementById('revenueChart').getContext('2d');
             new Chart(revenueCtx, {
                 type: 'bar',
@@ -892,9 +831,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: { grid: { display: false } },
                         y: { grid: { color: '#f0ece6' } }
@@ -902,7 +839,6 @@
                 }
             });
 
-            // Client Sources (vide)
             const sourcesCtx = document.getElementById('sourcesChart').getContext('2d');
             new Chart(sourcesCtx, {
                 type: 'doughnut',
@@ -918,13 +854,10 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     cutout: '65%',
-                    plugins: {
-                        legend: { display: false }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
 
-            // Instagram Engagement (vide)
             const instagramCtx = document.getElementById('instagramChart').getContext('2d');
             new Chart(instagramCtx, {
                 type: 'line',
@@ -942,9 +875,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: { grid: { display: false } },
                         y: { grid: { color: '#f0ece6' } }
@@ -952,7 +883,6 @@
                 }
             });
 
-            // LinkedIn Growth (vide)
             const linkedinCtx = document.getElementById('linkedinChart').getContext('2d');
             new Chart(linkedinCtx, {
                 type: 'bar',
@@ -968,9 +898,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: { grid: { display: false } },
                         y: { grid: { color: '#f0ece6' } }
@@ -978,7 +906,6 @@
                 }
             });
 
-            // Newsletter Performance (vide)
             const newsletterCtx = document.getElementById('newsletterChart').getContext('2d');
             new Chart(newsletterCtx, {
                 type: 'bar',
@@ -994,9 +921,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: { grid: { display: false } },
                         y: { grid: { color: '#f0ece6' } }
@@ -1005,9 +930,6 @@
             });
         }
 
-        // ============================================
-        // INTERACTIONS
-        // ============================================
         function setPeriod(period) {
             document.querySelectorAll('.date-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
