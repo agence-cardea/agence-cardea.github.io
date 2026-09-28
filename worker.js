@@ -3,11 +3,13 @@
 
 export default {
   async fetch(request, env) {
-    // CORS — autorise le dashboard à appeler ce worker
+    // CORS — autorise le dashboard à appeler ce worker (y compris dans Notion iframe)
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Max-Age': '86400',
     };
 
     if (request.method === 'OPTIONS') {
@@ -48,7 +50,12 @@ export default {
       }
 
       return new Response(JSON.stringify(data), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        headers: { 
+          ...corsHeaders, 
+          'Content-Type': 'application/json',
+          'X-Frame-Options': 'ALLOWALL',
+          'Content-Security-Policy': 'frame-ancestors *'
+        }
       });
 
     } catch (error) {
