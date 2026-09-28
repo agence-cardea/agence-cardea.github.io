@@ -3,7 +3,6 @@
 
 export default {
   async fetch(request, env) {
-    // CORS — autorise le dashboard à appeler ce worker
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -14,7 +13,6 @@ export default {
       return new Response(null, { headers: corsHeaders });
     }
 
-    // Récupérer le paramètre "source" pour savoir quelle API appeler
     const url = new URL(request.url);
     const source = url.searchParams.get('source');
 
@@ -30,6 +28,9 @@ export default {
           break;
         case 'tally':
           data = await getTallyStats(env);
+          break;
+        case 'notion':
+          data = await getNotionStats(env);
           break;
         case 'instagram':
           data = await getInstagramStats(env);
@@ -57,19 +58,14 @@ export default {
   }
 };
 
-// ============================================
-// MAILERLITE
-// ============================================
 async function getMailerLiteStats(env) {
   const apiKey = env.MAILERLITE_API_KEY;
   
-  // Récupérer les abonnés
   const subsResponse = await fetch('https://api.mailerlite.com/api/v2/subscribers', {
     headers: { 'X-MailerLite-ApiKey': apiKey }
   });
   const subsData = await subsResponse.json();
 
-  // Récupérer les campagnes
   const campaignsResponse = await fetch('https://api.mailerlite.com/api/v2/campaigns', {
     headers: { 'X-MailerLite-ApiKey': apiKey }
   });
@@ -90,9 +86,6 @@ async function getMailerLiteStats(env) {
   };
 }
 
-// ============================================
-// THRIVECART
-// ============================================
 async function getThriveCartStats(env) {
   const apiKey = env.THRIVECART_API_KEY;
   
@@ -100,7 +93,6 @@ async function getThriveCartStats(env) {
     return { error: 'Thrivecart non configuré' };
   }
 
-  // Récupérer les produits
   const productsResponse = await fetch('https://api.thrivecart.com/v2/products', {
     headers: { 
       'Authorization': `Bearer ${apiKey}`,
@@ -109,7 +101,6 @@ async function getThriveCartStats(env) {
   });
   const productsData = await productsResponse.json();
 
-  // Récupérer les commandes (30 derniers jours)
   const ordersResponse = await fetch('https://api.thrivecart.com/v2/orders?limit=50', {
     headers: { 
       'Authorization': `Bearer ${apiKey}`,
@@ -118,7 +109,6 @@ async function getThriveCartStats(env) {
   });
   const ordersData = await ordersResponse.json();
 
-  // Calculer les revenus
   const totalRevenue = ordersData.orders?.reduce((sum, order) => sum + (order.total || 0), 0) || 0;
   const orderCount = ordersData.orders?.length || 0;
 
@@ -137,9 +127,6 @@ async function getThriveCartStats(env) {
   };
 }
 
-// ============================================
-// TALLY
-// ============================================
 async function getTallyStats(env) {
   const apiKey = env.TALLY_API_KEY;
   
@@ -147,7 +134,6 @@ async function getTallyStats(env) {
     return { error: 'Tally non configuré' };
   }
 
-  // Récupérer les formulaires
   const formsResponse = await fetch('https://api.tally.so/forms', {
     headers: { 
       'Authorization': `Bearer ${apiKey}`,
@@ -156,7 +142,6 @@ async function getTallyStats(env) {
   });
   const formsData = await formsResponse.json();
 
-  // Récupérer les réponses (si l'API le permet)
   const responsesResponse = await fetch('https://api.tally.so/responses', {
     headers: { 
       'Authorization': `Bearer ${apiKey}`,
@@ -177,9 +162,43 @@ async function getTallyStats(env) {
   };
 }
 
-// ============================================
-// INSTAGRAM (à configurer avec le token Facebook)
-// ============================================
+async function getNotionStats(env) {
+  const apiKey = env.NOTION_API_KEY;
+  const databaseId = env.NOTION_DATABASE_ID;
+
+  if (!apiKey || !databaseId) {
+    return { error: 'Notion non configuré' };
+  }
+
+  const now = new Date();
+  const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+
+  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'Notion-Version': '2022-06-28'
+    },
+    body: JSON.stringify({
+      filter: {
+        property: 'Created time',
+        date: {
+          on_or_after: firstDayOfMonth
+        }
+      },
+      page_size: 100
+    })
+  });
+
+  const data = await response.json();
+
+  return {
+    newClients: data.results?.length || 0,
+    totalLeads: data.results?.length || 0
+  };
+}
+
 async function getInstagramStats(env) {
   const accessToken = env.INSTAGRAM_TOKEN;
   const instagramId = env.INSTAGRAM_ACCOUNT_ID;
@@ -188,13 +207,11 @@ async function getInstagramStats(env) {
     return { error: 'Instagram non configuré' };
   }
 
-  // Récupérer les métriques du compte
   const response = await fetch(
     `https://graph.instagram.com/${instagramId}?fields=followers_count,follows_count,media_count&access_token=${accessToken}`
   );
   const data = await response.json();
 
-  // Récupérer les insights (nécessite un compte Business)
   const insightsResponse = await fetch(
     `https://graph.instagram.com/${instagramId}/insights?metric=impressions,reach,profile_views&period=day&access_token=${accessToken}`
   );
@@ -210,9 +227,6 @@ async function getInstagramStats(env) {
   };
 }
 
-// ============================================
-// LINKEDIN (à configurer avec le token LinkedIn)
-// ============================================
 async function getLinkedInStats(env) {
   const accessToken = env.LINKEDIN_TOKEN;
   const organizationId = env.LINKEDIN_ORG_ID;
